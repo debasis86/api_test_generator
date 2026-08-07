@@ -1,0 +1,10 @@
+google-adk
+google-genai
+python-dotenv
+pandas
+openpyxl
+jira
+reportlab
+pytest
+pytest-mock
+chromadb
