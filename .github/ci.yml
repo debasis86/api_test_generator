@@ -1,0 +1,29 @@
+name:  CI for API Test Generator
+
+on:
+  workflow_dispatch: # Manual trigger via GitHub Actions UI
+
+
+jobs:
+  run-adk-agent:
+    runs-on: ubuntu-latest
+    env:
+      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v3
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m venv venv
+          source venv/bin/activate  
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Generate Tests
+        run: adk run agent.py
